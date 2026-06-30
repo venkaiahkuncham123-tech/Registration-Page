@@ -21,7 +21,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: '17'
-          distribution: 'temurin
+          distribution: 'temurin'
       - run: java --version
       - run: mvn --version
   compiling-and-buildig:
