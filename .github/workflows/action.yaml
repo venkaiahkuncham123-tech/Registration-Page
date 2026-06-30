@@ -18,10 +18,10 @@ jobs:
     runs-on: self-hosted
     steps:      
       - name: Set up Maven and Java
-        uses: s4u/setup-maven-action@v3
+        uses: actions/setup-java@v4
         with:
           java-version: '17'
-          maven-version: '3.9.6'
+          distribution: 'temurin
       - run: java --version
       - run: mvn --version
   compiling-and-buildig:
