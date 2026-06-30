@@ -21,10 +21,11 @@
 	</properties>
 	
 	<dependencies>
-		<!-- Spring Web for Rest Controllers and API endpoints -->
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
+	<!-- Spring Web for Rest Controllers and API endpoints -->
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
 
 		<!-- Spring Data JPA for Database communication -->
 		<dependency>
