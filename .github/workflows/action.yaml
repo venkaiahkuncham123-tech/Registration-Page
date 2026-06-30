@@ -5,13 +5,14 @@ on:
       - main
       - dev
       - master
-  pull_requests:
+    paths-ignore: 
+      - frontend/*
+  pull_request:
     branches:
       - main
     types:
       - closed
-  paths-ignore:
-    - .github/*
+  workflow_dispatch: 
 jobs:
   git-checkout:
     runs-on: self-hosted
@@ -19,12 +20,11 @@ jobs:
       - name: cloning-repo
         uses: actions/checkout@v7
       - name: changing-directory
-        woking-directory: ./backend
-      - name: installing-dependenceis
+        working-directory: ./backend
         run: mvn clean package
   running-project:
     runs-on: self-hosted
-    needs: git-checkout:
+    needs: git-checkout
     steps:
       - name: runningg
         run: java -jar ./target/*.jar
