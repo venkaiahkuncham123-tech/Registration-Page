@@ -1,0 +1,29 @@
+name: registration-page
+on:
+  push:
+    branches:
+      - main
+      - dev
+  pull_requests:
+    branches:
+      - main
+    types:
+      - closed
+  paths-ignore:
+    - .github/*
+jobs:
+  git-checkout:
+    runs-on: self-hosted
+    steps:
+      - name: cloning-repo
+        uses: actions/checkout@v7
+      - name: changing-directory
+        woking-directory: ./backend
+      - name: installing-dependenceis
+        run: mvn clean package
+  running-project:
+    runs-on: self-hosted
+    needs: git-checkout:
+    steps:
+      - name: running-project:
+        run: java -jar ./target/*.jar
