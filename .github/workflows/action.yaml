@@ -4,26 +4,47 @@ on:
     branches:
       - main
       - dev
-  pull_requests:
+      - master
+    paths-ignore: 
+      - frontend/*
+      - .github/*
+  pull_request:
     branches:
       - main
     types:
       - closed
-  paths-ignore:
-    - .github/*
+  workflow_dispatch: 
+env:
+  - DB_HOST: {{ secrets.DB_HOST }}
+  - DB_NAME: {{ secrets.DB_NAME }}
+  - DB_USER: {{ secrets.DB_USER }}
+  - DB_PASSWORD: {{ secrets.DB_PASSWORD }}
 jobs:
-  git-checkout:
+  java-installation:
     runs-on: self-hosted
-    steps:
-      - name: cloning-repo
+    steps:      
+      - name: Set up Maven and Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - run: java --version
+  compiling-and-buildig:
+    runs-on: self-hosted
+    needs: java-installation
+    steps:   
+      - name: git checkout
         uses: actions/checkout@v7
+      - name: maven installation
+        uses: s4u/setup-maven-action@3.9.8
+        with:
+          java-version: 8       
       - name: changing-directory
-        woking-directory: ./backend
-      - name: installing-dependenceis
+        working-directory: ./backend
         run: mvn clean package
   running-project:
     runs-on: self-hosted
-    needs: git-checkout:
+    needs: compiling-and-buildig
     steps:
-      - name: running-project:
+      - name: runningg
         run: java -jar ./target/*.jar
