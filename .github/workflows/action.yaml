@@ -35,11 +35,7 @@ jobs:
     steps:   
       - name: git checkout
         uses: actions/checkout@v7
-      - name: maven installation
-        uses: s4u/setup-maven-action@v1.7.0
-        with:
-          java-version: '17'
-          maven-version: '3.9.8'    
+ 
       - name: changing-directory
         working-directory: ./backend
         run: mvn clean package
